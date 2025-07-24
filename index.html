@@ -2,14 +2,184 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Mein Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dominik Schmidt - Portfolio</title>
     <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 5em; }
-        h1 { color: #333; }
+        /* --- CSS für den Terminal-Look --- */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+        :root {
+            --background: #1a1b26;
+            --foreground: #c0caf5;
+            --green: #9ece6a;
+            --cyan: #7dcfff;
+            --comment: #5c6370;
+            --prompt: #bb9af7;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: 'Fira Code', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .terminal {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .line {
+            display: flex;
+            white-space: pre-wrap; /* Wichtig für Zeilenumbrüche */
+        }
+
+        .prompt {
+            color: var(--prompt);
+            margin-right: 0.5em;
+            font-weight: bold;
+        }
+        
+        .command {
+            color: var(--green);
+        }
+
+        .output {
+            color: var(--foreground);
+        }
+
+        .comment {
+            color: var(--comment);
+        }
+
+        a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        h2 {
+            color: var(--green);
+            font-weight: bold;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        /* Blinking Cursor */
+        .cursor {
+            display: inline-block;
+            background-color: var(--foreground);
+            width: 10px;
+            height: 1.2em;
+            animation: blink 1s step-end infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent }
+            50% { background-color: var(--foreground); }
+        }
     </style>
 </head>
 <body>
-    <h1>Willkommen auf meiner Webseite!</h1>
-    <p>Dieses Projekt wird mit CI/CD automatisch veröffentlicht.</p>
+
+    <div class="terminal">
+        <div class="line">
+            <span class="prompt">&gt;</span>
+            <span class="command" id="cmd1"></span>
+        </div>
+        <div class="output" id="out1" style="display:none;">
+            Hallo!<br>
+            Ich bin Dominik, ein begeisterter Technologie-Enthusiast mit einer Leidenschaft für effiziente und automatisierte Systeme. Mein Fokus liegt auf Linux-Systemadministration, DevOps-Methoden und Netzwerktechnik.<br>
+            Ich liebe es, komplexe Probleme zu lösen und robuste Infrastrukturen zu entwerfen und zu implementieren. In meiner Freizeit entwickle ich gerne Anwendungen, wie zum Beispiel meine Kotlin App <a href="https://play.google.com/store/apps/details?id=com.dracco.mygaminglist" target="_blank">MyGamingList</a>.<br>
+            Diese Webseite dient als Schaufenster meiner Fähigkeiten und Projekte. Schau dich gerne auf meiner Hauptseite <a href="https://schmidtdominik.org" target="_blank">schmidtdominik.org</a> um!
+        </div>
+
+        <div class="line" style="margin-top: 2em;">
+            <span class="prompt">root@portfolio:/usr/local/bin$</span>
+            <span class="command" id="cmd2"></span>
+        </div>
+        <div class="output" id="out2" style="display:none;">
+            Eine detaillierte Übersicht meiner technischen Fähigkeiten und Werkzeuge, die ich täglich einsetze und kontinuierlich erweitere. Mein Ziel ist es, robuste und effiziente Lösungen zu entwickeln.
+            
+            <h2>Linux Systemadministration</h2>
+            Fundierte Kenntnisse in der Verwaltung, Konfiguration und Absicherung von Linux-Servern in verschiedenen Umgebungen. Erfahrung mit der Automatisierung von Systemaufgaben.
+            <div class="comment">&gt; Spezifische Kenntnisse & Tools:
+// Distributionen: Debian, Ubuntu Server
+// Shell-Scripting: Bash, Python
+// Virtualisierung: KVM, QEMU, Proxmox VE</div>
+
+            <h2>DevOps & Automatisierung</h2>
+            Praktische Erfahrung in der Implementierung von DevOps-Prinzipien zur Verbesserung von Entwicklungs- und Bereitstellungsprozessen.
+            <div class="comment">&gt; Spezifische Kenntnisse & Tools:
+// Containerisierung: Docker, Docker Compose
+// Orchestrierung: Kubernetes (Grundlagen, Minikube, k3s)
+// CI/CD: GitLab CI
+// Infrastructure as Code: Terraform (Grundlagen), Ansible
+// Version Control: Git, GitHub, GitLab</div>
+            
+            <h2>Netzwerktechnik</h2>
+            Solides Verständnis von Netzwerkprotokollen, -architekturen und -sicherheit. Erfahrung in der Konfiguration und Fehlerbehebung von Netzwerkkomponenten und -diensten.
+            <div class="comment">&gt; Spezifische Kenntnisse & Tools:
+// Protokolle: TCP/IP Suite (IPv4/IPv6), DNS, DHCP, HTTP/S, VPN (OpenVPN, WireGuard)
+// Firewalls: Fortigate (Grundlagen)
+// Netzwerk-Monitoring: Wireshark, nmap
+// Wireless Networking: Grundlagen und Sicherheitsaspekte</div>
+
+            <h2>Kotlin Entwicklung</h2>
+            Entwicklung nativer Android-Anwendungen mit Kotlin unter Verwendung moderner Architekturmuster und Bibliotheken. Interesse an serverseitiger Kotlin-Entwicklung.
+            <div class="comment">&gt; Spezifische Kenntnisse & Tools:
+// Android SDK, Jetpack Compose, Material Design
+// Architekturmuster: MVVM, Clean Architecture (Grundlagen)
+// Bibliotheken: Room, Retrofit, Coroutines & Flow
+// Build-Tool: Gradle</div>
+            
+            <h2>Automatisierung (Allgemein)</h2>
+            Breites Interesse und praktische Anwendung von Automatisierungstechniken zur Effizienzsteigerung in verschiedenen IT-Bereichen, von Systemaufgaben bis hin zu Entwicklungsworkflows.
+            <div class="comment">&gt; Spezifische Kenntnisse & Tools:
+// Scripting: Bash, Python, PowerShell (Grundlagen)
+// Workflow-Automatisierung: Node-RED (für private Projekte)</div>
+        </div>
+        <div class="line">
+            <span class="prompt">&gt;</span><span class="cursor"></span>
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript für den Schreibmaschinen-Effekt ---
+        async function typeCommand(elementId, text, speed = 50) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = ''; // Leeren für den Fall eines Resets
+            for (let i = 0; i < text.length; i++) {
+                element.innerHTML += text.charAt(i);
+                await new Promise(resolve => setTimeout(resolve, speed));
+            }
+        }
+
+        async function runTerminal() {
+            const cmd1 = 'whoami';
+            const out1 = document.getElementById('out1');
+            
+            const cmd2 = './list_skills --all --verbose';
+            const out2 = document.getElementById('out2');
+
+            await typeCommand('cmd1', cmd1);
+            out1.style.display = 'block';
+            
+            await new Promise(resolve => setTimeout(resolve, 500)); // Kurze Pause
+
+            await typeCommand('cmd2', cmd2);
+            out2.style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', runTerminal);
+    </script>
+
 </body>
 </html>
