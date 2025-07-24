@@ -1,21 +1,39 @@
-name: CI Pipeline - Webseite bauen
+name: Webseite bauen und veröffentlichen
 
-# Dieses Event startet die Pipeline
 on:
   push:
-    branches: [ "main" ] # Nur bei Änderungen auf dem main-Branch
+    branches: [ "main" ]
 
-# Die Aufgaben, die ausgeführt werden sollen
+# Berechtigungen für die Veröffentlichung geben
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  build:
-    name: Bau-Prozess
-    runs-on: ubuntu-latest # Wir leihen uns einen Computer mit Ubuntu von GitHub
+  deploy:
+    name: Webseite veröffentlichen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Die URL der Seite nachher ausgeben
 
     steps:
       # 1. Schritt: Code herunterladen
       - name: Code auschecken
         uses: actions/checkout@v4
 
-      # 2. Schritt: Ein einfacher "Test"
-      - name: Test-Schritt simulieren
-        run: echo "Der Code wurde erfolgreich ausgecheckt!"
+      # 2. Schritt: GitHub Pages vorbereiten
+      - name: GitHub Pages konfigurieren
+        uses: actions/configure-pages@v5
+
+      # 3. Schritt: Webseite als "Artefakt" hochladen
+      - name: Webseiten-Artefakt hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Wir laden alles aus dem Hauptverzeichnis hoch
+
+      # 4. Schritt: Webseite veröffentlichen
+      - name: Webseite deployen
+        id: deployment
+        uses: actions/deploy-pages@v4
