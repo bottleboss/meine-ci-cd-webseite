@@ -1,0 +1,21 @@
+name: CI Pipeline - Webseite bauen
+
+# Dieses Event startet die Pipeline
+on:
+  push:
+    branches: [ "main" ] # Nur bei Änderungen auf dem main-Branch
+
+# Die Aufgaben, die ausgeführt werden sollen
+jobs:
+  build:
+    name: Bau-Prozess
+    runs-on: ubuntu-latest # Wir leihen uns einen Computer mit Ubuntu von GitHub
+
+    steps:
+      # 1. Schritt: Code herunterladen
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      # 2. Schritt: Ein einfacher "Test"
+      - name: Test-Schritt simulieren
+        run: echo "Der Code wurde erfolgreich ausgecheckt!"
